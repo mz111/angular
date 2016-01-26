@@ -1,0 +1,22 @@
+{
+  "name": "practice-angular",
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "moduleType": [],
+  "homepage": "y",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/libs",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.6",
+    "angular": "~1.4.8",
+    "underscore": "~1.8.3",
+    "angular-bootstrap": "~1.1.0"
+  }
+}

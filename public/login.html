@@ -1,0 +1,31 @@
+
+	<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h4>Login Form</h4>
+		</div>
+		<div class="modal-body">
+	<form class="form-inline" ng-show="!username">
+		<div class="form-group">
+			<label>User Name</label>
+			<input type="text" class="form-control" ng-model="user.name">
+		</div>
+
+		<div class="form-group">
+			<label>Password</label>
+			<input type="password" class="form-control" ng-model="user.password">
+		</div>
+	</form>
+	<span style="color: red;" ng-show="!!errmsg" ng-bind-html="errmsg"></span>
+	<div ng-show="!!username">Welcome, {{username}}! 
+		<button ng-click="logout()">Logout</button>
+	</div> 
+	</div>
+	<div class="modal-footer">
+		<button class="btn btn-primary" ng-click="signup(user)">Sign up</button>
+		<button class="btn btn-success" ng-click="login(user)">Login</button>
+	</div>
+	
+</div>
+
+
