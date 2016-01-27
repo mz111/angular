@@ -1,20 +1,55 @@
 (function(){
-	'use strict';
+    'use strict';
 	
-	angular.module('main',['ui.bootstrap'])
-		.service('LoginService', function($http){
-			var self = this;
-			$http.get('/api/login', function(info){
-				self.username = info.username;
-			});
+    angular.module('main',['ui.bootstrap','ui.router'])
+        .service('LoginService', function($http){
+		    var self = this;
+		    $http.get('/api/login', function(info){
+			self.username = info.username;
+		    });
             self.getUser = function() {
                 return $http.get('/api/login');
             }
             self.logout = function() {
-            	return $http.get('api/login/logout');
+            	return $http.get('/api/login/logout');
             }
 		})
+        .config(function($stateProvider,$urlRouterProvider){
+        	$urlRouterProvider.otherwise('/');
+
+        	$stateProvider
+        		.state('list', {
+        			url:'/',
+			    	templateUrl: 'list.html',
+			    	controller: 'UserCtrl',
+		            controllerAs: 'user'
+				})
+				.state('user', {
+				    url: '/user',
+				    templateUrl: 'user.html',
+				    controller: 'UserCtrl',
+		            controllerAs: 'user'
+				});
+
+        })
+	/*.config(['$routeProvider','$locationProvider',function($routeProvider,$locationProvider){
+	    $routeProvider
+			.when('/', {
+			    templateUrl: 'list.html',
+			    controller: 'UserCtrl',
+	            controllerAs: 'user'
+			})
+			.when('/user', {
+			    templateUrl: 'user.html',
+			    controller: 'UserCtrl',
+	            controllerAs: 'user'
+			})
+			.otherwise({redirectTo:'/'});
 		
+		$locationProvider.html5Mode(true);
+
+
+	}])*/
 		/*.factory('L2', function($http){
 			var self = this;
 			return {
@@ -29,12 +64,12 @@
 	        var self = this;
             
             LoginService.getUser().success(function(data){
-                //if use then, hte username should be like 
+                //if use then, the username should be like 
                 //data.data.username
                 self.username = data.username;
             });        
            /* L2.getUser().success(function(data){
-                //if use then, hte username should be like 
+                //if use then, the username should be like 
                 //data.data.username
                 self.username1 = data.username;
             }) ;    */   
@@ -76,8 +111,8 @@
 	                templateUrl: "login.html",
 	                controller: "LoginCtrl"
 	            });
-	            LoginService.loginModal.result.then(function(data){
-	                	self.username = data.username;
+	        LoginService.loginModal.result.then(function(data){
+	            self.username = data.username;
             });
         };
 	}]);
